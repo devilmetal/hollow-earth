@@ -19,8 +19,14 @@ def do_action(verb,obj,player):
 		#TODO: finish
 		
 	if verb == 'examine':
-		a=0
-		#TODO: finish
+		flag=False
+		for item in player.level.items:
+			if item.name == obj.lower():
+				message='You examine '+obj+' : '+item.examine
+				return message
+		if not(flag):
+			message='Not such an item in this part of the map.'
+			return message
 		
 	if verb == 'pick':
 		flag=False
@@ -34,7 +40,6 @@ def do_action(verb,obj,player):
 		if not(flag):
 			message='Not such an item in this part of the map.'
 			return message
-		#TODO: finish
 
 def do_direct_action(verb,player):
 	message=None
@@ -149,7 +154,7 @@ def decode_action(sentence,player):
 				message = verb.capitalize()+" what ?"
 				return message
 			else:
-				obj = splited_sentence[1]
+				obj = splited_sentence[1].lower()
 				message = do_action(verb,obj,player)
 				return message
 		if verb in direct_actions:
