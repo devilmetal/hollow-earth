@@ -2,9 +2,6 @@ import uuid
 import world.Player as Player
 import world.Level as Level
 import world.Map as Map
-import world.Weapon as Weapon
-import world.Armor as Armor
-import world.Item as Item
 import engine.bcolors as bcolors
 import time
 import engine.routines as routines
@@ -61,9 +58,9 @@ class Game:
 		routines.instant_clear()
 		print ''
 		print "\t"+bcolors.bcolors.UNDERLINE+"Description"+bcolors.bcolors.ENDC
-		print self.description
+		print self.player.level.description
 		print "\t"+bcolors.bcolors.UNDERLINE+"Directions"+bcolors.bcolors.ENDC
-		print self.directions
+		print self.player.level.directions
 		print ''
 		print ''	
 		print self.console
@@ -71,18 +68,8 @@ class Game:
 	
 	def newmap(self):
 		self.map = Map.Map()
-		description = 'It is a windy forest with very high trees. You are in the middle of a crossing and you can choose to go in any directions.'
-		directions=['n','e','w','s'] # north east west south
-		self.map.levels.append(Level.Level(description,directions))
-		self.map.levels[0].weapons.append(Weapon.Weapon('Wooden sword',1,'This is an useless sword'))
-		self.map.levels[0].armors.append(Armor.Armor('Grass skirt',0,'This is an useless armor'))
-		self.map.levels[0].items.append(Item.Item('item1',[],[],'item 1 test'))
-		self.map.levels[0].items.append(Item.Item('item2',[],[],'item 2 test'))
-		self.map.levels[0].items.append(Item.Item('item3',[],[],'item 3 test'))
-		self.map.levels[0].items.append(Item.Item('item4',[],[],'item 4 test'))
-		self.description=description
-		self.directions=directions
-		self.player.level = self.map.levels[0]
+		first_level = self.map.createMap()
+		self.player.level = first_level
 		
 	def run(self):
 		flag = True

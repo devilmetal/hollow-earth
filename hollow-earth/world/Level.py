@@ -4,7 +4,7 @@ import world.Item as Item
 import uuid
 
 class Level:
-	def __init__(self,description,directions,first='nope'):
+	def __init__(self,description,directions):
 		self.id=uuid.uuid4()
 		self.description=description
 		self.directions=directions
