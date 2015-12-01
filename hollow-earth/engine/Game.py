@@ -68,8 +68,8 @@ class Game:
 	
 	def newmap(self):
 		self.map = Map.Map()
-		first_level = self.map.createMap()
-		self.player.level = first_level
+		self.map.createMap()
+		self.player.level = self.map.firstLevel()
 		
 	def run(self):
 		flag = True

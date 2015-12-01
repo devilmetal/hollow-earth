@@ -19,5 +19,11 @@ class Map:
 		level.items.append(Item.Item('item2',[],[],'item 2 test'))
 		level.items.append(Item.Item('item3',[],[],'item 3 test'))
 		level.items.append(Item.Item('item4',[],[],'item 4 test'))
+		level.x=0;
+		level.y=0;
 		self.levels.append(level)
-		return level
+		
+	def firstLevel(self):
+		items = [level for level in self.levels if (level.x == 0 and level.y == 0)]
+		return items[0]
+		

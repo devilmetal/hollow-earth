@@ -12,3 +12,5 @@ class Level:
 		self.weapons=[]
 		self.monsters=[]
 		self.armors=[]
+		self.x=None;
+		self.y=None;
