@@ -3,5 +3,5 @@ class Armor:
 	def __init__(self,name,protection,examine):
 		self.id=uuid.uuid4()
 		self.name = name
-		self.damage = protection
+		self.protection = protection
 		self.examine=examine

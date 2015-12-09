@@ -13,9 +13,7 @@ class Player:
 		self.max_hp=None
 		self.inventory = None
 		self.armor=None
-		self.armor_value = None
 		self.weapon=None
-		self.weapon_value = None
 		
 	def create(self):
 		print bcolors.bcolors.WARNING  +"Welcome in the player creation" + bcolors.bcolors.ENDC
@@ -29,9 +27,7 @@ class Player:
 		self.max_hp=10
 		self.inventory = []
 		self.armor=None
-		self.armor_value = 0
 		self.weapon=None
-		self.weapon_value = 0
 		
 	def bypass_creation(self):
 		self.name='Bob'
@@ -39,6 +35,4 @@ class Player:
 		self.max_hp=10
 		self.inventory = []
 		self.armor=None
-		self.armor_value = 0
 		self.weapon=None
-		self.weapon_value = 0

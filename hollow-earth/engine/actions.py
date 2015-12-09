@@ -1,7 +1,9 @@
 import random
 import engine.bcolors as bcolors
+import world.Weapon as Weapon
+import world.Armor as Armor
 
-verb_list = ['go','examine','pick']
+verb_list = ['go','examine','pick','equip']
 direct_actions = ['help','look','status']
 
 fail_list_return = ["What the fuck are you trying to do ?", 
@@ -66,6 +68,28 @@ def do_action(verb,obj,player):
 		if not(flag):
 			message='Not such an item in this part of the map.'
 			return message
+	if verb == 'equip':
+		flag=False
+		for item in player.inventory:
+			if item.name.lower() == obj.lower():
+				flag=True
+				index = player.inventory.index(item)
+				if player.inventory[index].__class__ == Armor.Armor:
+					if player.armor != None:
+						player.inventory.append(player.armor)
+					player.armor=player.inventory.pop(index)
+				elif player.inventory[index].__class__ == Weapon.Weapon:
+					if player.weapon != None:
+						player.inventory.append(player.weapon)
+					player.weapon=player.inventory.pop(index)
+				else:
+					message='You can not equip this item.'
+					return message
+				message='You equip '+obj
+				return message
+		if not(flag):
+			message='You do not have such an item.'
+			return message
 
 def do_direct_action(verb,player):
 	message=None
@@ -83,13 +107,13 @@ def do_direct_action(verb,player):
 		message+='\tInventory : '+str(array_inventory)
 		if not(player.armor==None):
 			message+='\n'
-			message+='\tArmor : '+player.armor.name+' (defense : '+str(player.armor_value)+')'
+			message+='\tArmor : '+player.armor.name+' (defense : '+str(player.armor.protection)+')'
 		else:
 			message+='\n'
 			message+='\tArmor : no armor equiped'
 		if not(player.weapon==None):
 			message+='\n'
-			message+='\tWeapon : '+player.weapon.name+' (attack : '+str(player.weapon_value)+')'
+			message+='\tWeapon : '+player.weapon.name+' (attack : '+str(player.weapon.damage)+')'
 		else:
 			message+='\n'
 			message+='\tWeapon : no weapon equiped'
@@ -110,7 +134,7 @@ def do_direct_action(verb,player):
 		message+='\n'
 		message+=bcolors.bcolors.UNDERLINE+'\t\tActions with objects'+bcolors.bcolors.ENDC
 		message+='\n'
-		message+='\t\tType (examine,pick) + object'
+		message+='\t\tType (examine,pick,equip) + object'
 		message+='\n'
 	if verb == 'look':
 		#CHECK FOR ITEMS

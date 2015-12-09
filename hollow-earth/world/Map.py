@@ -14,7 +14,9 @@ class Map:
 		level.description = 'It is a windy forest with very high trees. You are in the middle of a crossing and you can choose to go in any directions.'
 		level.directions=['n','e','w','s'] # north east west south
 		level.weapons.append(Weapon.Weapon('Wooden sword',1,'This is an useless sword'))
+		level.weapons.append(Weapon.Weapon('Wooden sword2',1,'This is an useless sword'))
 		level.armors.append(Armor.Armor('Grass skirt',0,'This is an useless armor'))
+		level.armors.append(Armor.Armor('Grass skirt2',0,'This is an useless armor'))
 		level.items.append(Item.Item('item1',[],[],'item 1 test'))
 		level.items.append(Item.Item('item2',[],[],'item 2 test'))
 		level.items.append(Item.Item('item3',[],[],'item 3 test'))
