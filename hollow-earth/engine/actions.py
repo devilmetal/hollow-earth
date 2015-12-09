@@ -21,7 +21,19 @@ def do_action(verb,obj,player):
 	if verb == 'examine':
 		flag=False
 		for item in player.level.items:
-			if item.name == obj.lower():
+			if item.name.lower() == obj.lower():
+				message='You examine '+obj+' : '+item.examine
+				return message
+		for item in player.inventory:
+			if item.name.lower() == obj.lower():
+				message='You examine '+obj+' : '+item.examine
+				return message
+		for item in player.level.weapons:
+			if item.name.lower() == obj.lower():
+				message='You examine '+obj+' : '+item.examine
+				return message
+		for item in player.level.armors:
+			if item.name.lower() == obj.lower():
 				message='You examine '+obj+' : '+item.examine
 				return message
 		if not(flag):
@@ -31,10 +43,24 @@ def do_action(verb,obj,player):
 	if verb == 'pick':
 		flag=False
 		for item in player.level.items:
-			if item.name == obj.lower():
+			if item.name.lower() == obj.lower():
 				flag=True
 				index = player.level.items.index(item)
 				player.inventory.append(player.level.items.pop(index))
+				message='You pick '+obj+' and put it in your pockets'
+				return message
+		for item in player.level.weapons:
+			if item.name.lower() == obj.lower():
+				flag=True
+				index = player.level.weapons.index(item)
+				player.inventory.append(player.level.weapons.pop(index))
+				message='You pick '+obj+' and put it in your pockets'
+				return message
+		for item in player.level.armors:
+			if item.name.lower() == obj.lower():
+				flag=True
+				index = player.level.armors.index(item)
+				player.inventory.append(player.level.armors.pop(index))
 				message='You pick '+obj+' and put it in your pockets'
 				return message
 		if not(flag):
@@ -154,7 +180,12 @@ def decode_action(sentence,player):
 				message = verb.capitalize()+" what ?"
 				return message
 			else:
-				obj = splited_sentence[1].lower()
+				obj=''
+				for i in range(len(splited_sentence)-2):
+					obj+=splited_sentence[i+1]
+					obj+=' '
+				obj+=splited_sentence[-1]
+				obj = obj.lower()
 				message = do_action(verb,obj,player)
 				return message
 		if verb in direct_actions:
